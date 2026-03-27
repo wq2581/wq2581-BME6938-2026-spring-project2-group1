@@ -152,10 +152,10 @@ See `requirements.txt` for the complete list. Key libraries:
 
 | Name | Role |
 |------|------|
-| **James Garner** | Data preprocessing and exploratory data analysis |
-| **Pascual Jahuey** | Custom CNN architecture design and training |
-| **Jai Raccioppi** | Transfer learning (ResNet-18) implementation and evaluation |
-| **Qing Wang** | Pipeline integration, documentation, and report writing |
+| **James Garner** | Data preprocessing, documentation, exploratory data analysis, and report writing |
+| **Pascual Jahuey** | Custom CNN architecture design, documentation, and report writing |
+| **Jai Raccioppi** | Transfer learning (ResNet-18) implementation, documentation, and report writing |
+| **Qing Wang** | Team Communication, Pipeline integration, documentation, evaluation metrics, figure, demo coding, and report writing |
 
 ## References
 
