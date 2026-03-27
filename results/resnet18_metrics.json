@@ -1,0 +1,8 @@
+{
+  "accuracy": 0.9501392757660168,
+  "precision": 0.9506344076399836,
+  "recall": 0.9501392757660168,
+  "f1_score": 0.9495603211788516,
+  "roc_auc": 0.997551257712829,
+  "classification_report": "                                      precision    recall  f1-score   support\n\n                             Adipose       1.00      0.96      0.98      1338\n                          Background       0.99      1.00      1.00       847\n                              Debris       0.82      1.00      0.90       339\n                         Lymphocytes       0.99      0.99      0.99       634\n                               Mucus       0.95      1.00      0.97      1035\n                       Smooth Muscle       0.88      0.85      0.87       592\n                 Normal Colon Mucosa       0.95      0.96      0.95       741\n            Cancer-Associated Stroma       0.80      0.70      0.75       421\nColorectal Adenocarcinoma Epithelium       0.97      0.97      0.97      1233\n\n                            accuracy                           0.95      7180\n                           macro avg       0.93      0.94      0.93      7180\n                        weighted avg       0.95      0.95      0.95      7180\n"
+}

@@ -1,0 +1,48 @@
+# Project 2 Configuration
+# PathMNIST: 9-class colorectal tissue classification
+
+dataset:
+  name: "pathmnist"
+  image_size: 224
+  data_dir: "./data"
+  num_classes: 9
+  class_names:
+    - "Adipose"
+    - "Background"
+    - "Debris"
+    - "Lymphocytes"
+    - "Mucus"
+    - "Smooth Muscle"
+    - "Normal Colon Mucosa"
+    - "Cancer-Associated Stroma"
+    - "Colorectal Adenocarcinoma Epithelium"
+
+training:
+  batch_size: 32
+  num_epochs: 20
+  learning_rate: 0.001
+  weight_decay: 0.0001
+  patience: 5
+  num_workers: 2
+  seed: 42
+
+augmentation:
+  random_horizontal_flip: true
+  random_vertical_flip: true
+  random_rotation: 15
+  color_jitter:
+    brightness: 0.2
+    contrast: 0.2
+    saturation: 0.2
+    hue: 0.1
+
+model:
+  custom_cnn:
+    name: "CustomCNN"
+  pretrained:
+    name: "ResNet18"
+    freeze_layers: false
+
+output:
+  results_dir: "./results"
+  model_dir: "./results/models"
