@@ -34,17 +34,24 @@ CLASS_NAMES = [
 def get_transforms(augment=True, target_size=224):
     """Create data transforms for training and evaluation.
 
-    Images are loaded at 28x28 to save memory, then resized to target_size
-    (224x224) for model compatibility.
+Images in PathMNIST are originally 28x28 pixels. They are resized to 224x224
+to match the input size expected by convolutional neural networks such as ResNet.
 
-    Args:
-        augment: If True, apply data augmentation (for training).
-                 If False, only resize and normalize (for val/test).
-        target_size: Target image resolution for the model (default 224).
+When augment=True (training):
+- Applies geometric transformations (flips, rotations) since tissue orientation is arbitrary
+- Applies color jitter to simulate staining variability
+- Normalizes using ImageNet statistics for compatibility with pretrained models
 
-    Returns:
-        torchvision.transforms.Compose object.
-    """
+When augment=False (validation/test):
+- Applies only resizing and normalization to ensure consistent evaluation
+
+Args:
+    augment: Whether to apply data augmentation (True for training).
+    target_size: Target image resolution (default 224).
+
+Returns:
+    torchvision.transforms.Compose object.
+"""
     if augment:
         transform = transforms.Compose([
             transforms.ToTensor(),
@@ -65,7 +72,7 @@ def get_transforms(augment=True, target_size=224):
         ])
     return transform
 
-
+# Training data uses augmentation to improve generalization, while validation/test data uses deterministic preprocessing for fair evaluation
 def load_pathmnist(data_dir="./data", image_size=224):
     """Download and load PathMNIST dataset with appropriate transforms.
 
@@ -113,7 +120,8 @@ def create_dataloaders(train_dataset, val_dataset, test_dataset,
     Returns:
         Tuple of (train_loader, val_loader, test_loader).
     """
-    train_loader = DataLoader(
+    # Shuffle training data to improve learning, but keep validation/test deterministic
+        train_loader = DataLoader(
         train_dataset, batch_size=batch_size, shuffle=True,
         num_workers=num_workers, pin_memory=True,
     )
@@ -130,15 +138,19 @@ def create_dataloaders(train_dataset, val_dataset, test_dataset,
 
 
 def get_raw_dataset(data_dir="./data", image_size=224):
-    """Load the dataset without normalization for visualization purposes.
+    """Load PathMNIST dataset without normalization for visualization and EDA.
 
-    Args:
-        data_dir: Root directory for storing the dataset.
-        image_size: Target image resolution.
+This version of the dataset is intended for exploratory analysis, where
+pixel values should remain interpretable. Normalization is intentionally
+excluded so that images can be displayed in their original form.
 
-    Returns:
-        Tuple of (train_dataset, val_dataset, test_dataset) with ToTensor only.
-    """
+Args:
+    data_dir: Root directory for storing the dataset.
+    image_size: Target image resolution.
+
+Returns:
+    Tuple of (train_dataset, val_dataset, test_dataset).
+"""
     import os
     os.makedirs(data_dir, exist_ok=True)
 
