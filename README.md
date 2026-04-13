@@ -12,6 +12,35 @@ Colorectal cancer is the third most commonly diagnosed cancer and the second lea
 
 ## Quick Start
 
+## Preprocessing Pipeline
+
+The PathMNIST dataset consists of 28×28 RGB histopathology image patches. To ensure compatibility with convolutional neural networks such as ResNet18, all images are resized to 224×224.
+
+For the training dataset, data augmentation techniques are applied to improve model generalization. These include random horizontal and vertical flips, random rotations (±15 degrees), and color jitter to simulate variability in staining conditions.
+
+For validation and testing, only resizing and normalization are applied to ensure consistent evaluation.
+
+All images are normalized using ImageNet mean and standard deviation values, allowing the use of pretrained architectures.
+
+## Reproducing Results
+
+To reproduce the results:
+
+1. Install dependencies:
+   pip install -r requirements.txt
+
+2. Train Custom CNN:
+   python src/train.py --model custom_cnn
+
+3. Train ResNet18:
+   python src/train.py --model resnet18
+
+4. Train both models:
+   python src/train.py --model both
+
+5. View results:
+   Outputs including metrics, confusion matrices, and ROC curves are saved in the results/ directory.
+
 ### Prerequisites
 
 - Python 3.9+
